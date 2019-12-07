@@ -8,6 +8,32 @@ namespace TestBed
 {
     class Program
     {
+        static long repeatedString(string s, long n)
+        {
+            long numberOfRepeats = n / s.Length;
+            long remainder = n % s.Length;
+            Console.WriteLine("repeats=" +numberOfRepeats + " remainder="+remainder);
+            if (!s.Contains('a'))
+                return 0;
+
+            string remString = s.Substring(0, (int)remainder);
+
+            //select characters in string that are 'a'
+            IEnumerable<char> stringQuery =
+                 from ch in s
+                 where ch == 'a'
+                 select ch;
+            Console.WriteLine("sq.count=" + stringQuery.Count());
+            //select characters in sub string that are 'a'
+            IEnumerable<char> subStringQuery =
+                 from ch in remString
+                 where ch == 'a'
+                 select ch;
+            Console.WriteLine("ssq.count=" + subStringQuery.Count());
+            long count = (stringQuery.Count() * numberOfRepeats) + subStringQuery.Count();
+   
+            return count;
+        }
 
         static int countingValleys(int n, string s)
         {
@@ -166,13 +192,23 @@ namespace TestBed
 
         static void Main(string[] args)
         {
+            Console.WriteLine("repeated string"); //repeated string
+            string repStringInput = "aba";
+            long lengthOfString = 10;
+            Console.WriteLine(repeatedString(repStringInput, lengthOfString));
+            Console.ReadKey();
+            //counting valleys
             string steps = "DDUUUU";
             Console.WriteLine(countingValleys(6,steps));
             Console.ReadKey();
+            //sockmerchant
             int[] socks = { 1, 2, 1, 2, 1, 3, 2 };
             Console.WriteLine(sockMerchant(socks.Length, socks));
             Console.ReadKey();
+            //staircase
             staircase(6);
+
+            //diagonal difference
             Console.ReadKey();
             List<List<int>> ml = new List<List<int>>
             {
@@ -180,10 +216,12 @@ namespace TestBed
                 new List<int> {4,5,6},
                 new List<int> {7,8,9}
             };
+            
             int res = diagonalDifference(ml);
             Console.WriteLine("dd = " + res.ToString());
             Console.ReadKey();
 
+            //rotate left
             int d = 4;
             int[] a = { 1, 2, 3, 4, 5 };
             int[] result = rotLeft(a, d);
