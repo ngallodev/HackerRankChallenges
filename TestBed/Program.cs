@@ -14,29 +14,32 @@ namespace TestBed
             int valleyTotal=0;
             bool valleyStart = false;
             int elevation = 0;
-            for(int x = 0; x< n; x++)
+            if (s.Length > 0)
             {
-                int newElevation = 0;
-                switch (s[x])
+                for (int x = 0; x < n; x++)
                 {
-                    case 'D':
-                        newElevation = elevation--;
-                        break;
-                    case 'U':
-                        newElevation = elevation++;
-                        break;
-                    default:
-                        break;
-                }
-                if (elevation == 0 && newElevation == -1)
-                    valleyStart = true;
-                else if(elevation==-1 && newElevation == 0)
-                {
-                    //left a valley, increment counter, set flag to false
-                    valleyStart = false;
-                    valleyTotal++;
-                }
+                    int newElevation = 0;
+                    switch (s[x])
+                    {
+                        case 'D':
+                            newElevation = elevation--;
+                            break;
+                        case 'U':
+                            newElevation = elevation++;
+                            break;
+                        default:
+                            break;
+                    }
+                    if (elevation == 0 && newElevation == -1)
+                        valleyStart = true;
+                    else if (elevation == -1 && newElevation == 0)
+                    {
+                        //left a valley, increment counter, set flag to false
+                        valleyStart = false;
+                        valleyTotal++;
+                    }
 
+                }
             }
 
 
