@@ -8,6 +8,39 @@ namespace TestBed
 {
     class Program
     {
+        // Complete the checkMagazine function below.
+        static void checkMagazine(string[] magazine, string[] note)
+        {
+            string result = "No";
+            if (magazine.Length >= note.Length)
+            {
+                Dictionary<string,int> magazineHash = new Dictionary<string, int>();
+                foreach(string word in magazine)
+                {
+                    if (magazineHash.ContainsKey(word))
+                        magazineHash[word]++;
+                    else
+                        magazineHash.Add(word, 1);
+                }
+
+                
+                result = "Yes";
+                foreach(string s in note)
+                {
+                    //if the word is not in the magazine, or we've used up all instances of the word
+                    if (!magazineHash.ContainsKey(s) || magazineHash[s] == 0)
+                        result = "No";
+                    else
+                    {
+                        //decrement count of word
+                        magazineHash[s]--;
+                    }
+                }
+
+            }
+            Console.WriteLine(result);
+        }
+
         static long repeatedString(string s, long n)
         {
             long numberOfRepeats = n / s.Length;
@@ -192,6 +225,11 @@ namespace TestBed
 
         static void Main(string[] args)
         {
+            Console.WriteLine("checkMagazine - ransom note");
+            string[] magazine = { "give", "me", "one", "grand", "today", "night" };
+            string[] note = { "give", "one", "grand", "today" };
+            checkMagazine(magazine, note);
+            Console.ReadKey();
             Console.WriteLine("repeated string"); //repeated string
             string repStringInput = "aba";
             long lengthOfString = 10;
