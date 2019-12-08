@@ -8,6 +8,25 @@ namespace TestBed
 {
     class Program
     {
+
+        static int birthdayCakeCandles(int[] ar)
+        {
+            int high = 0;
+            int count = 0;
+
+            for(int x = 0; x < ar.Length; x++)
+            {
+                if (ar[x] > high)
+                {
+                    high = ar[x];
+                    count = 1;
+                }
+                else if (ar[x] == high)
+                    count++;
+            }
+            return count;
+        }
+
         // Complete the checkMagazine function below.
         static void checkMagazine(string[] magazine, string[] note)
         {
@@ -225,6 +244,11 @@ namespace TestBed
 
         static void Main(string[] args)
         {
+            Console.WriteLine("Birthday cake candles");
+            int[] candleArray = { 1, 1, 2, 4, 3, 3, 4 };
+            Console.WriteLine("Candles blown {0}",birthdayCakeCandles(candleArray));
+            Console.ReadKey();
+
             Console.WriteLine("checkMagazine - ransom note");
             string[] magazine = { "give", "me", "one", "grand", "today", "night" };
             string[] note = { "give", "one", "grand", "today" };
