@@ -8,7 +8,35 @@ namespace TestBed
 {
     class Program
     {
+        public static int pickingNumbers(List<int> a)
+        {
+            List<int> counter = new List<int>();
 
+            //ar.Add(newList);
+            a.Sort();
+            //int currentNumber = 0;
+            for (int x = 0; x < a.Count; x++)
+            {
+                List<int> newList = new List<int>();
+                newList.Add(a[x]);
+                for (int y = x + 1; y < a.Count; y++)
+                {
+                    if (Math.Abs(a[x] - a[y]) <= 1)
+                    {
+                        newList.Add(a[y]);
+                    }
+                }
+                counter.Add(newList.Count);
+
+            }
+            counter.Sort();
+            foreach (int i in counter)
+                Console.WriteLine(i);
+            //Console.WriteLine(counter.ToString());
+
+            return counter[counter.Count - 1];
+
+        }
         static int birthdayCakeCandles(int[] ar)
         {
             int high = 0;
@@ -217,7 +245,7 @@ namespace TestBed
            
             return Math.Abs(a-b);
         }
-        // Complete the rotLeft function below.
+        /// Complete the rotLeft function below.
         static int[] rotLeft(int[] a, int d)
         {
             if (a.Length > 0)
@@ -244,6 +272,9 @@ namespace TestBed
 
         static void Main(string[] args)
         {
+            Console.WriteLine("picking numbers");
+
+            Console.ReadKey();
             Console.WriteLine("Birthday cake candles");
             int[] candleArray = { 1, 1, 2, 4, 3, 3, 4 };
             Console.WriteLine("Candles blown {0}",birthdayCakeCandles(candleArray));
